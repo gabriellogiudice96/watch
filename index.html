@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="icon" href="img/imagenwatch.jpg">
+    <title>달력</title>
+</head>
+<body onload="initClock()">
+    <video  autoplay muted loop>
+        <source src="img/seoul.mp4" type="video/mp4">
+    </video>
+    <div class="datetime">
+        <div class="date">
+            <span id="days">Day</span>
+            <span id="months">Month</span>
+            <span id="dates">00</span>
+            <span id="years">Year</span>
+        </div>
+        <div class="time">
+            <span id="hour">00</span>
+            <p>:</p>
+            <span id="minutes">00</span>
+            <p>:</p>
+            <span id="seconds">00</span>
+        </div>
+    </div>
+
+
+<style>
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+}
+body::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #1b1b1b, #00b67f);
+
+    transition: 1s ease; 
+}
+
+body:hover::before {
+    opacity: 0;
+}
+
+.datetime{
+    position: absolute;
+    color: #cacaca;
+    background:  #201f5f  ;
+    font-family: "segoe UI", sans-serif;
+    width: 340px;
+    padding: 15px 10px;
+    border: 3px solid #16476d;
+    border-radius: 25px;
+    -webkit-box-reflect: below 1px linear-gradient(transparent, rgba(255, 255, 255, 0.1));
+    transition: 0.5s;
+    transition-property: background, box-shadow;
+
+}
+
+.datetime:hover{
+    background: #0081e4;
+    box-shadow: 0 0 30px #017edd;
+    
+}
+
+.date{
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 3px;
+}
+
+.time{
+    font-size: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.time span:not(:last-child){
+    position: relative;
+    margin: 0 6px;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 5px;
+}
+p{
+    margin-right: 4px;
+}
+
+</style>
+
+<script >
+function initClock() {
+  setInterval(updateClock, 1000);
+}
+function updateClock() {
+const date = document.getElementById("dates"); 
+const day = document.getElementById("days"); 
+const month = document.getElementById("months"); 
+const year = document.getElementById("years"); 
+
+const hour = document.getElementById("hour");
+const min = document.getElementById("minutes");
+const sec = document.getElementById("seconds");
+
+
+
+const today = new Date();
+
+const weekDays = ["일요일","월요일","화요일","수요일","목요일","금요일","토요일"];
+const allMonths = ["일월", "이월", "삼월",  "사월", "오월", "유월", "칠월", "팔월 ","구월","시월","십일월","십이월"];
+
+
+
+let hours = today.getHours();
+let minuntes= today.getMinutes();
+let seconds= today.getSeconds();
+
+
+hour.innerHTML = hours;
+sec.innerHTML = (today.getSeconds()<10?"0":"")+ today.getSeconds();
+min.innerHTML = (today.getMinutes()<10?"0":"")+ today.getMinutes();
+date.innerHTML = (today.getDate()<10?"0":"")+ today.getDate();
+day.innerHTML = weekDays[today.getDay()];
+month.innerHTML = allMonths[today.getMonth()];
+year.innerHTML = today.getFullYear();
+}
+</script>
+    
+</body>
+</html>
